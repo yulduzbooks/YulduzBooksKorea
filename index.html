@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yulduz Books Korea</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f5f0;
+      color: #222;
+    }
+
+    header {
+      padding: 25px 20px;
+      background: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    p {
+      color: #666;
+    }
+
+    .search {
+      margin: 20px;
+      padding: 14px;
+      width: calc(100% - 40px);
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 20px;
+    }
+
+    .category {
+      background: white;
+      padding: 20px 10px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .books {
+      padding: 20px;
+    }
+
+    .book {
+      background: white;
+      padding: 18px;
+      margin-bottom: 12px;
+      border-radius: 15px;
+    }
+
+    .book button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: white;
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>📚 Yulduz Books Korea</h1>
+  <p>Kitob — qalb va tafakkur uchun oziqa.</p>
+</header>
+
+<input class="search" type="text" placeholder="🔎 Kitob qidirish...">
+
+<div class="categories">
+  <div class="category">🇺🇿 O‘zbek adabiyoti</div>
+  <div class="category">☪️ Islomiy kitoblar</div>
+  <div class="category">🌍 Dunyo adabiyoti</div>
+  <div class="category">🔥 Yangi kitoblar</div>
+</div>
+
+<div class="books">
+
+  <div class="book">
+    <h3>📖 Kitob nomi</h3>
+    <p>Muallif: Muallif nomi</p>
+    <p><b>₩25,000</b></p>
+    <button>🛒 Savatga qo‘shish</button>
+  </div>
+
+  <div class="book">
+    <h3>📖 Kitob nomi</h3>
+    <p>Muallif: Muallif nomi</p>
+    <p><b>₩20,000</b></p>
+    <button>🛒 Savatga qo‘shish</button>
+  </div>
+
+</div>
+
+</body>
+</html>
