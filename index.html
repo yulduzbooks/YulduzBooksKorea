@@ -1,78 +1,235 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yulduz Books Korea</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f7f5f0;
-      color: #222;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yulduz Books Korea</title>
 
-    header {
-      padding: 25px 20px;
-      background: white;
-      text-align: center;
-    }
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    h1 {
-      margin: 0;
-      font-size: 26px;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    p {
-      color: #666;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f6f3ed;
+  color: #222;
+  padding-bottom: 80px;
+}
 
-    .search {
-      margin: 20px;
-      padding: 14px;
-      width: calc(100% - 40px);
-      box-sizing: border-box;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      font-size: 16px;
-    }
+header {
+  background: #171717;
+  color: white;
+  padding: 24px 18px;
+  text-align: center;
+}
 
-    .categories {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 0 20px;
-    }
+header h1 {
+  margin: 0;
+  font-size: 25px;
+}
 
-    .category {
-      background: white;
-      padding: 20px 10px;
-      border-radius: 15px;
-      text-align: center;
-      font-size: 16px;
-    }
+header p {
+  margin: 8px 0 0;
+  color: #ddd;
+  font-size: 14px;
+}
 
-    .books {
-      padding: 20px;
-    }
+.search {
+  margin: 18px;
+  width: calc(100% - 36px);
+  padding: 14px 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  outline: none;
+  background: white;
+}
 
-    .book {
-      background: white;
-      padding: 18px;
-      margin-bottom: 12px;
-      border-radius: 15px;
-    }
+.section-title {
+  padding: 0 18px;
+  margin: 18px 0 12px;
+  font-size: 20px;
+}
 
-    .book button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #222;
-      color: white;
-      font-size: 15px;
-    }
-  </style>
+.categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 18px;
+}
+
+.category {
+  background: white;
+  padding: 16px 8px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #eee;
+}
+
+.category.active {
+  background: #171717;
+  color: white;
+}
+
+.books {
+  padding: 0 18px;
+}
+
+.book {
+  background: white;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.book-cover {
+  height: 150px;
+  background: #eee;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 55px;
+  margin-bottom: 12px;
+}
+
+.book h3 {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.author {
+  color: #777;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.add-btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 11px;
+  background: #171717;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cart-box {
+  display: none;
+  padding: 18px;
+}
+
+.cart-item {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qty button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: #eee;
+  font-size: 18px;
+}
+
+.total {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.order-btn {
+  width: 100%;
+  padding: 15px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #171717;
+  color: white;
+  font-size: 16px;
+}
+
+.form-box {
+  display: none;
+  padding: 18px;
+}
+
+.form-box input,
+.form-box textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  background: white;
+  outline: none;
+}
+
+.form-box textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+}
+
+.bottom button {
+  border: none;
+  background: none;
+  font-size: 12px;
+  color: #555;
+}
+
+.bottom button span {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 3px;
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 10px;
+  color: #777;
+}
+</style>
 </head>
 
 <body>
@@ -82,32 +239,507 @@
   <p>Kitob — qalb va tafakkur uchun oziqa.</p>
 </header>
 
-<input class="search" type="text" placeholder="🔎 Kitob qidirish...">
+<input
+  id="search"
+  class="search"
+  type="text"
+  placeholder="🔎 Kitob qidirish..."
+  oninput="searchBooks()"
+>
+
+<h2 class="section-title">📚 Kategoriyalar</h2>
 
 <div class="categories">
-  <div class="category">🇺🇿 O‘zbek adabiyoti</div>
-  <div class="category">☪️ Islomiy kitoblar</div>
-  <div class="category">🌍 Dunyo adabiyoti</div>
-  <div class="category">🔥 Yangi kitoblar</div>
-</div>
-
-<div class="books">
-
-  <div class="book">
-    <h3>📖 Kitob nomi</h3>
-    <p>Muallif: Muallif nomi</p>
-    <p><b>₩25,000</b></p>
-    <button>🛒 Savatga qo‘shish</button>
+  <div class="category active" onclick="filterCategory('all', this)">
+    📚 Barchasi
   </div>
 
-  <div class="book">
-    <h3>📖 Kitob nomi</h3>
-    <p>Muallif: Muallif nomi</p>
-    <p><b>₩20,000</b></p>
-    <button>🛒 Savatga qo‘shish</button>
+  <div class="category" onclick="filterCategory('uzbek', this)">
+    🇺🇿 O‘zbek adabiyoti
   </div>
 
+  <div class="category" onclick="filterCategory('islamic', this)">
+    ☪️ Islomiy
+  </div>
+
+  <div class="category" onclick="filterCategory('world', this)">
+    🌍 Jahon adabiyoti
+  </div>
 </div>
+
+<h2 class="section-title">📖 Kitoblar</h2>
+
+<div id="books" class="books"></div>
+
+<div id="cart" class="cart-box">
+  <h2>🛒 Savatim</h2>
+  <div id="cartItems"></div>
+
+  <div class="total">
+    Jami: <span id="total">₩0</span>
+  </div>
+
+  <button class="order-btn" onclick="openOrder()">
+    📦 Buyurtma berish
+  </button>
+</div>
+
+<div id="order" class="form-box">
+
+  <h2>📦 Buyurtma</h2>
+
+  <input id="name" placeholder="Ismingiz">
+
+  <input id="phone" placeholder="Telefon raqamingiz">
+
+  <textarea id="address"
+    placeholder="Koreyadagi manzilingiz"></textarea>
+
+  <button class="order-btn" onclick="sendOrder()">
+    ✅ Buyurtmani tasdiqlash
+  </button>
+
+</div>
+
+<div class="bottom">
+
+  <button onclick="showHome()">
+    <span>🏠</span>
+    Bosh sahifa
+  </button>
+
+  <button onclick="showBooks()">
+    <span>📚</span>
+    Kitoblar
+  </button>
+
+  <button onclick="showCart()">
+    <span>🛒</span>
+    Savat
+  </button>
+
+  <button onclick="showOrderDirect()">
+    <span>📦</span>
+    Buyurtma
+  </button>
+
+</div>
+
+<script>
+
+const tg = window.Telegram.WebApp;
+
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
+
+const books = [
+
+  {
+    id: 1,
+    name: "O‘tkan kunlar",
+    author: "Abdulla Qodiriy",
+    price: 25000,
+    category: "uzbek",
+    icon: "📖"
+  },
+
+  {
+    id: 2,
+    name: "Mehrobdan chayon",
+    author: "Abdulla Qodiriy",
+    price: 22000,
+    category: "uzbek",
+    icon: "📕"
+  },
+
+  {
+    id: 3,
+    name: "Ruhiy tarbiya",
+    author: "Islomiy adabiyot",
+    price: 30000,
+    category: "islamic",
+    icon: "☪️"
+  },
+
+  {
+    id: 4,
+    name: "Qur’on ma’nolari",
+    author: "Islomiy kitob",
+    price: 35000,
+    category: "islamic",
+    icon: "📗"
+  },
+
+  {
+    id: 5,
+    name: "Alkimyogar",
+    author: "Paulo Coelho",
+    price: 28000,
+    category: "world",
+    icon: "🌍"
+  },
+
+  {
+    id: 6,
+    name: "Kichkina shahzoda",
+    author: "Antoine de Saint-Exupéry",
+    price: 20000,
+    category: "world",
+    icon: "⭐"
+  }
+
+];
+
+let cart = [];
+let currentCategory = "all";
+
+function formatPrice(price) {
+  return "₩" + price.toLocaleString("ko-KR");
+}
+
+function renderBooks(list = books) {
+
+  const container = document.getElementById("books");
+
+  container.innerHTML = "";
+
+  if (list.length === 0) {
+    container.innerHTML =
+      '<div class="empty">🔎 Kitob topilmadi</div>';
+    return;
+  }
+
+  list.forEach(book => {
+
+    container.innerHTML += `
+
+      <div class="book">
+
+        <div class="book-cover">
+          ${book.icon}
+        </div>
+
+        <h3>${book.name}</h3>
+
+        <div class="author">
+          Muallif: ${book.author}
+        </div>
+
+        <div class="price">
+          ${formatPrice(book.price)}
+        </div>
+
+        <button
+          class="add-btn"
+          onclick="addToCart(${book.id})">
+          🛒 Savatga qo‘shish
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+function addToCart(id) {
+
+  const book = books.find(b => b.id === id);
+
+  const existing = cart.find(item => item.id === id);
+
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({
+      ...book,
+      qty: 1
+    });
+  }
+
+  alert("🛒 Kitob savatga qo‘shildi!");
+
+  updateCart();
+
+}
+
+function updateCart() {
+
+  const container = document.getElementById("cartItems");
+
+  if (cart.length === 0) {
+
+    container.innerHTML =
+      '<div class="empty">🛒 Savatingiz hozircha bo‘sh</div>';
+
+    document.getElementById("total").innerText = "₩0";
+
+    return;
+  }
+
+  let total = 0;
+
+  container.innerHTML = "";
+
+  cart.forEach(item => {
+
+    total += item.price * item.qty;
+
+    container.innerHTML += `
+
+      <div class="cart-item">
+
+        <div class="cart-row">
+
+          <div>
+            <b>${item.name}</b>
+            <br>
+            <small>${formatPrice(item.price)}</small>
+          </div>
+
+          <div class="qty">
+
+            <button onclick="changeQty(${item.id}, -1)">
+              −
+            </button>
+
+            ${item.qty}
+
+            <button onclick="changeQty(${item.id}, 1)">
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document.getElementById("total").innerText =
+    formatPrice(total);
+
+}
+
+function changeQty(id, change) {
+
+  const item = cart.find(i => i.id === id);
+
+  if (!item) return;
+
+  item.qty += change;
+
+  if (item.qty <= 0) {
+
+    cart = cart.filter(i => i.id !== id);
+
+  }
+
+  updateCart();
+
+}
+
+function searchBooks() {
+
+  const text =
+    document.getElementById("search").value.toLowerCase();
+
+  const result = books.filter(book =>
+
+    book.name.toLowerCase().includes(text) ||
+
+    book.author.toLowerCase().includes(text)
+
+  );
+
+  renderBooks(result);
+
+}
+
+function filterCategory(category, element) {
+
+  currentCategory = category;
+
+  document
+    .querySelectorAll(".category")
+    .forEach(c => c.classList.remove("active"));
+
+  element.classList.add("active");
+
+  if (category === "all") {
+
+    renderBooks(books);
+
+  } else {
+
+    renderBooks(
+      books.filter(book => book.category === category)
+    );
+
+  }
+
+}
+
+function showHome() {
+
+  document.getElementById("books").style.display = "block";
+
+  document.getElementById("cart").style.display = "none";
+
+  document.getElementById("order").style.display = "none";
+
+  window.scrollTo(0, 0);
+
+}
+
+function showBooks() {
+
+  showHome();
+
+  window.scrollTo({
+    top: 250,
+    behavior: "smooth"
+  });
+
+}
+
+function showCart() {
+
+  document.getElementById("books").style.display = "none";
+
+  document.getElementById("cart").style.display = "block";
+
+  document.getElementById("order").style.display = "none";
+
+  updateCart();
+
+  window.scrollTo(0, 0);
+
+}
+
+function openOrder() {
+
+  if (cart.length === 0) {
+
+    alert("Avval kitobni savatga qo‘shing.");
+
+    return;
+
+  }
+
+  document.getElementById("books").style.display = "none";
+
+  document.getElementById("cart").style.display = "none";
+
+  document.getElementById("order").style.display = "block";
+
+  window.scrollTo(0, 0);
+
+}
+
+function showOrderDirect() {
+
+  if (cart.length === 0) {
+
+    alert("Avval kitobni savatga qo‘shing.");
+
+    return;
+
+  }
+
+  openOrder();
+
+}
+
+function sendOrder() {
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const address =
+    document.getElementById("address").value.trim();
+
+  if (!name || !phone || !address) {
+
+    alert("Iltimos, barcha ma’lumotlarni kiriting.");
+
+    return;
+
+  }
+
+  let message =
+    "📚 YULDUZ BOOKS KOREA%0A%0A";
+
+  message +=
+    "📦 Yangi buyurtma%0A%0A";
+
+  message +=
+    "👤 Ism: " + encodeURIComponent(name) + "%0A";
+
+  message +=
+    "📞 Telefon: " + encodeURIComponent(phone) + "%0A";
+
+  message +=
+    "📍 Manzil: " + encodeURIComponent(address) + "%0A%0A";
+
+  message += "📚 Kitoblar:%0A";
+
+  let total = 0;
+
+  cart.forEach(item => {
+
+    const sum = item.price * item.qty;
+
+    total += sum;
+
+    message +=
+      encodeURIComponent(
+        item.name +
+        " × " +
+        item.qty +
+        " = " +
+        formatPrice(sum)
+      ) + "%0A";
+
+  });
+
+  message +=
+    "%0A💰 Jami: " +
+    encodeURIComponent(formatPrice(total));
+
+  if (tg) {
+
+    tg.sendData(message);
+
+    alert(
+      "✅ Buyurtmangiz tayyorlandi!"
+    );
+
+  } else {
+
+    alert(
+      "Buyurtma tayyorlandi. Telegram orqali yuborish uchun bot tizimini ulash kerak."
+    );
+
+  }
+
+}
+
+renderBooks();
+
+updateCart();
+
+</script>
 
 </body>
 </html>
+
